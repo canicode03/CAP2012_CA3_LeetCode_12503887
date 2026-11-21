@@ -1,13 +1,13 @@
-01_LC01_twosum.cpp
+02_LC26_RemoveDuplicatesFromSortedArray.cpp
 class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        for(int i = 0; i < nums.length; i++) {
-            for(int j = i + 1; j < nums.length; j++) { 
-                if(nums[i] + nums[j] == target) {
-                    return new int[]{i, j};
-                }
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int k = 0;
+        for (int x : nums) {
+            if (k == 0 || x != nums[k - 1]) {
+                nums[k++] = x;
             }
-        } 
-        return new int[]{};
+        }
+        return k;
     }
-}
+};
