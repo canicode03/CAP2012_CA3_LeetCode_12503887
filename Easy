@@ -1,10 +1,10 @@
-02_LC26_RemoveDuplicatesFromSortedArray.cpp
+03_LC27_RemoveElement.cpp
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
+    int removeElement(vector<int>& nums, int val) {
         int k = 0;
         for (int x : nums) {
-            if (k == 0 || x != nums[k - 1]) {
+            if (x != val) {
                 nums[k++] = x;
             }
         }
