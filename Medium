@@ -1,4 +1,4 @@
-11_LC19_RemoveNthNodeFromEndofList.cpp
+12_LC24_SwapNodesinPairs.cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -11,18 +11,14 @@
  */
 class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* dummy = new ListNode(0, head);
-        ListNode* fast = dummy;
-        ListNode* slow = dummy;
-        while (n--) {
-            fast = fast->next;
+    ListNode* swapPairs(ListNode* head) {
+        if (!head || !head->next) {
+            return head;
         }
-        while (fast->next) {
-            slow = slow->next;
-            fast = fast->next;
-        }
-        slow->next = slow->next->next;
-        return dummy->next;
+        ListNode* t = swapPairs(head->next->next);
+        ListNode* p = head->next;
+        p->next = head;
+        head->next = t;
+        return p;
     }
 };
