@@ -1,25 +1,18 @@
-07_LC206_ReverseLinkedList.cpp
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+08_LC203_RemoveLinkedListElements.cpp
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
+    ListNode* removeElements(ListNode* head, int val) {
         ListNode* dummy = new ListNode();
-        ListNode* curr = head;
-        while (curr) {
-            ListNode* next = curr->next;
-            curr->next = dummy->next;
-            dummy->next = curr;
-            curr = next;
+        dummy->next = head;
+        ListNode* p = dummy;
+        while (p->next) {
+            if (p->next->val == val) {
+                p->next = p->next->next;
+            } else {
+                p = p->next;
+            }
         }
         return dummy->next;
     }
 };
+
