@@ -1,9 +1,18 @@
-04_LC88_MergeSortedArray.cpp
+05_LC20_ValidParentheses.cpp
 class Solution {
 public:
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        for (int i = m - 1, j = n - 1, k = m + n - 1; ~j; --k) {
-            nums1[k] = i >= 0 && nums1[i] > nums2[j] ? nums1[i--] : nums2[j--];
+    bool isValid(string s) {
+        string stk;
+        unordered_map<char, char> d{{'(', ')'}, {'[', ']'}, {'{', '}'}};
+        for (char c : s) {
+            if (d.contains(c)) {
+                stk.push_back(d[c]);
+            } else if (stk.empty() || stk.back() != c) {
+                return false;
+            } else {
+                stk.pop_back();
+            }
         }
+        return stk.empty();
     }
 };
