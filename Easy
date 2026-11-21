@@ -1,18 +1,48 @@
-08_LC203_RemoveLinkedListElements.cpp
-class Solution {
+09_LC232_ImplementQueueusingStacks.cpp
+class MyQueue {
 public:
-    ListNode* removeElements(ListNode* head, int val) {
-        ListNode* dummy = new ListNode();
-        dummy->next = head;
-        ListNode* p = dummy;
-        while (p->next) {
-            if (p->next->val == val) {
-                p->next = p->next->next;
-            } else {
-                p = p->next;
+    MyQueue() {
+    }
+
+    void push(int x) {
+        stk1.push(x);
+    }
+
+    int pop() {
+        move();
+        int ans = stk2.top();
+        stk2.pop();
+        return ans;
+    }
+
+    int peek() {
+        move();
+        return stk2.top();
+    }
+
+    bool empty() {
+        return stk1.empty() && stk2.empty();
+    }
+
+private:
+    stack<int> stk1;
+    stack<int> stk2;
+
+    void move() {
+        if (stk2.empty()) {
+            while (!stk1.empty()) {
+                stk2.push(stk1.top());
+                stk1.pop();
             }
         }
-        return dummy->next;
     }
 };
 
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
