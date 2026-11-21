@@ -1,34 +1,28 @@
-10_LC2_AddTwoNumbers.cpp
-
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
-    struct ListNode* dummy = (struct ListNode*) malloc(sizeof(struct ListNode));
-    dummy->val = 0;
-    dummy->next = NULL;
-    struct ListNode* curr = dummy;
-    int carry = 0;
-
-    while (l1 != NULL || l2 != NULL || carry != 0) {
-        int sum = carry;
-        if (l1 != NULL) {
-            sum += l1->val;
-            l1 = l1->next;
+11_LC19_RemoveNthNodeFromEndofList.cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(0, head);
+        ListNode* fast = dummy;
+        ListNode* slow = dummy;
+        while (n--) {
+            fast = fast->next;
         }
-        if (l2 != NULL) {
-            sum += l2->val;
-            l2 = l2->next;
+        while (fast->next) {
+            slow = slow->next;
+            fast = fast->next;
         }
-
-        carry = sum / 10;
-        int val = sum % 10;
-
-        struct ListNode* newNode = (struct ListNode*) malloc(sizeof(struct ListNode));
-        newNode->val = val;
-        newNode->next = NULL;
-        curr->next = newNode;
-        curr = curr->next;
+        slow->next = slow->next->next;
+        return dummy->next;
     }
-
-    struct ListNode* result = dummy->next;
-    free(dummy);
-    return result;
-}
+};
