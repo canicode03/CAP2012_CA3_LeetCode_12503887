@@ -1,4 +1,4 @@
-06_LC21_MergeTwoSortedLists.cpp
+07_LC206_ReverseLinkedList.cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -11,15 +11,15 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if (!list1) return list2;
-        if (!list2) return list1;
-        if (list1->val <= list2->val) {
-            list1->next = mergeTwoLists(list1->next, list2);
-            return list1;
-        } else {
-            list2->next = mergeTwoLists(list1, list2->next);
-            return list2;
+    ListNode* reverseList(ListNode* head) {
+        ListNode* dummy = new ListNode();
+        ListNode* curr = head;
+        while (curr) {
+            ListNode* next = curr->next;
+            curr->next = dummy->next;
+            dummy->next = curr;
+            curr = next;
         }
+        return dummy->next;
     }
 };
