@@ -1,18 +1,25 @@
-05_LC20_ValidParentheses.cpp
+06_LC21_MergeTwoSortedLists.cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
-    bool isValid(string s) {
-        string stk;
-        unordered_map<char, char> d{{'(', ')'}, {'[', ']'}, {'{', '}'}};
-        for (char c : s) {
-            if (d.contains(c)) {
-                stk.push_back(d[c]);
-            } else if (stk.empty() || stk.back() != c) {
-                return false;
-            } else {
-                stk.pop_back();
-            }
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if (!list1) return list2;
+        if (!list2) return list1;
+        if (list1->val <= list2->val) {
+            list1->next = mergeTwoLists(list1->next, list2);
+            return list1;
+        } else {
+            list2->next = mergeTwoLists(list1, list2->next);
+            return list2;
         }
-        return stk.empty();
     }
 };
